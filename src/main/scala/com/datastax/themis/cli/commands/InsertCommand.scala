@@ -1,5 +1,7 @@
 package com.datastax.themis.cli.commands
 
+import com.datastax.oss.driver.api.core.cql.SimpleStatement
+import com.datastax.themis.ThemisException
 import picocli.CommandLine.{Command, Option => CliOption, Parameters}
 
 @Command(name = "insert", description = Array("Insert data into a table"))

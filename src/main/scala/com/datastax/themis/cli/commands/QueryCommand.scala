@@ -1,6 +1,6 @@
 package com.datastax.themis.cli.commands
 
-import com.datastax.oss.driver.api.core.cql.Row
+import com.datastax.oss.driver.api.core.cql.{Row, SimpleStatement}
 import picocli.CommandLine.{Command, Parameters}
 import scala.jdk.CollectionConverters.*
 

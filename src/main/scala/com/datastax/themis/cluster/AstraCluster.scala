@@ -3,6 +3,7 @@ package com.datastax.themis.cluster
 import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.{ResultSet, SimpleStatement}
 import com.datastax.themis.config.{ClusterConfigKey, ClusterName}
+import com.datastax.themis.ThemisException
 import java.nio.file.Paths
 
 class AstraCluster(name: ClusterName, config: Map[ClusterConfigKey, String]) extends Cluster:

@@ -1,6 +1,7 @@
 package com.datastax.themis.config
 
 import com.typesafe.config.{Config, ConfigFactory}
+import com.datastax.themis.ThemisException
 import scala.jdk.CollectionConverters.*
 import scala.util.Try
 
