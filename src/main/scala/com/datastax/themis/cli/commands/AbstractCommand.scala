@@ -7,7 +7,7 @@ import java.util.concurrent.Callable
 
 abstract class AbstractCommand extends Callable[Integer]:
   @CliOption(names = Array("-c", "--cluster"), description = Array("Cluster name"), required = true)
-  private var clusterName: String = _
+  private var clusterName: String = null
   
   protected def getCluster(): Cluster =
     ClusterFactory.createCluster(ClusterName(clusterName))

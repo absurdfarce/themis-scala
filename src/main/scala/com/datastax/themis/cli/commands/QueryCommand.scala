@@ -7,7 +7,7 @@ import scala.jdk.CollectionConverters.*
 @Command(name = "query", description = Array("Execute a CQL query"))
 class QueryCommand extends AbstractCommand:
   @Parameters(index = "0", description = Array("CQL query to execute"))
-  private var query: String = _
+  private var query: String = null
   
   override def call(): Integer =
     val cluster = getCluster()

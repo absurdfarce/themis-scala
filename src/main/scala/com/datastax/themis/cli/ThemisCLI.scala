@@ -18,5 +18,5 @@ class ThemisCli
 
 object ThemisCli:
   def main(args: Array[String]): Unit =
-    val exitCode = new CommandLine(ThemisCli()).execute(args: _*)
+    val exitCode = new CommandLine(ThemisCli()).execute(args*)
     System.exit(exitCode)

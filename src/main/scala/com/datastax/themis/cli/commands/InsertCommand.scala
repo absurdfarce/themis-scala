@@ -7,13 +7,13 @@ import picocli.CommandLine.{Command, Option => CliOption, Parameters}
 @Command(name = "insert", description = Array("Insert data into a table"))
 class InsertCommand extends AbstractCommand:
   @Parameters(index = "0", description = Array("Table name"))
-  private var table: String = _
+  private var table: String = null
   
   @CliOption(names = Array("-k", "--keyspace"), description = Array("Keyspace name"))
-  private var keyspace: String = _
+  private var keyspace: String = null
   
   @CliOption(names = Array("-d", "--data"), description = Array("Column data in format 'col1=val1,col2=val2'"), required = true)
-  private var data: String = _
+  private var data: String = null
   
   override def call(): Integer =
     val cluster = getCluster()
