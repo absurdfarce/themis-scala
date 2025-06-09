@@ -32,14 +32,13 @@ class InsertCommand extends AbstractCommand:
       if columnData.isEmpty then
         throw ThemisException("No data provided for insertion")
       
-      // Build INSERT query
+      // Build INSERT query with values directly in the query
       val columns = columnData.keys.mkString(", ")
-      val placeholders = columnData.keys.map(_ => "?").mkString(", ")
-      val query = s"INSERT INTO $fullTableName ($columns) VALUES ($placeholders)"
+      val values = columnData.values.map(formatValue).mkString(", ")
+      val query = s"INSERT INTO $fullTableName ($columns) VALUES ($values)"
       
-      // Execute query with values
-      val statement = SimpleStatement.newInstance(query, columnData.values.map(toTypedValue).toSeq*)
-      cluster.execute(statement)
+      // Execute query
+      cluster.execute(query)
       
       println(s"Data inserted into $fullTableName")
       0
@@ -50,10 +49,8 @@ class InsertCommand extends AbstractCommand:
     finally
       cluster.close()
   
-  private def toTypedValue(value: String): Object =
-    // Simple conversion - in a real app, you'd want more sophisticated type handling
-    if value == "null" then null
-    else if value.toLowerCase == "true" || value.toLowerCase == "false" then java.lang.Boolean.valueOf(value)
-    else if value.matches("-?\\d+") then java.lang.Integer.valueOf(value)
-    else if value.matches("-?\\d+\\.\\d+") then java.lang.Double.valueOf(value)
-    else value
+  private def formatValue(value: String): String =
+    if value == "null" then "null"
+    else if value.toLowerCase == "true" || value.toLowerCase == "false" then value
+    else if value.matches("-?\\d+") || value.matches("-?\\d+\\.\\d+") then value
+    else s"'${value.replace("'", "''")}'" // Escape single quotes for string values
